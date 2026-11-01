@@ -1,539 +1,1557 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<meta charset="utf-8">
-<title>Le Parc de Tristan</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
-<style>
-/* Mise en page : catalogue hi-fi des années 80, découpé en espaces. Chaque espace est une bande pleine largeur avec sa couleur. */
-:root {
-  --bg: #e4e7ea; --surface: #f4f5f6; --plate: #d5dade; --fg: #12181f; --muted: #515c67; --line: #b4bcc4;
-  --accent: #1c46c9; --led: #b86a00; --on-accent: #ffffff;
-  --c-game: #1c46c9; --t-game: #dbe3f7; --c-cine: #85297a; --t-cine: #f1dfee; --c-serv: #0a6a58; --t-serv: #d4ebe5; --c-net: #9c4700; --t-net: #f5e3cf; --c-mob: #ae1e3a; --t-mob: #f8dde2; --c-work: #47525f; --t-work: #dde1e5;
-  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
-  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #10161d; --surface: #182029; --plate: #1f2933; --fg: #e8ecf0; --muted: #9aa7b3; --line: #33404c;
-  --accent: #7f9fff; --led: #ffb43a; --on-accent: #0c1220; --c-game: #8aa6ff; --t-game: #141d33; --c-cine: #e58fd2; --t-cine: #2a1626; --c-serv: #4fd1b4; --t-serv: #0f2622; --c-net: #ffae5c; --t-net: #2b1c0d; --c-mob: #ff8b9e; --t-mob: #2e141a; --c-work: #b4c0cc; --t-work: #1a222b; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #10161d; --surface: #182029; --plate: #1f2933; --fg: #e8ecf0; --muted: #9aa7b3; --line: #33404c;
-  --accent: #7f9fff; --led: #ffb43a; --on-accent: #0c1220; --c-game: #8aa6ff; --t-game: #141d33; --c-cine: #e58fd2; --t-cine: #2a1626; --c-serv: #4fd1b4; --t-serv: #0f2622; --c-net: #ffae5c; --t-net: #2b1c0d; --c-mob: #ff8b9e; --t-mob: #2e141a; --c-work: #b4c0cc; --t-work: #1a222b; color-scheme: dark }
-*, *::before, *::after { box-sizing: border-box }
-html { scroll-behavior: smooth; scroll-padding-top: 44px }
-body { margin: 0 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } }
-body { background: var(--bg); color: var(--fg); font: 400 17px/1.55 var(--body) }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
-.inner { max-width: 1192px; margin-inline: auto; display: grid; gap: 40px; padding-block: 72px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
-.inner + .space, .space + .space { margin-top: 0 }
-.space { background: var(--tint); --led: var(--accent); --plate: var(--surface) }
-#gaming { --accent: var(--c-game); --tint: var(--t-game) }
-#cinema { --accent: var(--c-cine); --tint: var(--t-cine) }
-#serveur { --accent: var(--c-serv); --tint: var(--t-serv) }
-#reseau { --accent: var(--c-net); --tint: var(--t-net) }
-#mobile { --accent: var(--c-mob); --tint: var(--t-mob) }
-#travail { --accent: var(--c-work); --tint: var(--t-work) }
-.space-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 24em); gap: 8px 40px; align-items: end; border-bottom: 6px solid var(--accent); padding-bottom: 18px }
-.space-head .kicker { grid-column: 1 / -1; font: 600 .78rem var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--accent) }
-.space-head h2 { font-size: clamp(3.6rem, 11vw, 8.5rem); font-weight: 900; line-height: .86; color: var(--accent) }
-.space-head p { font-size: 1.08rem }
-h3.sub { font: 600 .84rem var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line) }
-a { color: var(--accent); text-underline-offset: 3px }
-a:focus-visible { outline: 2px solid var(--led); outline-offset: 2px }
-img { display: block; width: 100%; height: 100%; object-fit: cover }
-h1, h2, h3 { font-family: var(--display); font-weight: 800; text-wrap: balance; margin: 0; line-height: .98 }
-h2 { font-size: clamp(2.6rem, 6vw, 4.4rem); text-transform: uppercase }
-h3 { font-size: 2rem }
-p { margin: 0 }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Parc de Tristan — Hardware & Setup Zen</title>
+  <meta name="description" content="Vitrine matérielle de Tristan : PC SFF, OLED, NAS shucké, réseau Wi-Fi 7 et mobilité. Approche zen, silencieuse et durable.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line);
-  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
-  display: flex; gap: 6px 20px; flex-wrap: wrap; justify-content: center; font: 600 .78rem var(--mono); text-transform: uppercase; letter-spacing: .06em }
-nav a { color: var(--fg); text-decoration: none; padding: 2px 0 }
-nav a:hover { color: var(--accent) }
-nav a[class]::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; background: var(--dot) }
-.n-game { --dot: var(--c-game) } .n-cine { --dot: var(--c-cine) } .n-serv { --dot: var(--c-serv) }
-.n-net { --dot: var(--c-net) } .n-mob { --dot: var(--c-mob) } .n-work { --dot: var(--c-work) }
+  <style>
+    /* ==========================================================================
+       STYLE ZEN & SÉRÉNITÉ (Inspiré de l'esthétique Shindzela / Japandi Studio)
+       Teintes sable, lin chaud, blanc doux, typographie aérée en capitales espacées.
+       ========================================================================== */
 
-.hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 40px; align-items: end }
-.hero h1 { font-size: clamp(4.4rem, 13vw, 10.5rem); font-weight: 900; text-transform: uppercase; line-height: .84; letter-spacing: -.005em }
-.hero h1 span { color: var(--accent); display: block }
-.hero .lede { font-size: 1.28rem; max-width: 34ch; margin-top: 24px }
-.hero figure { margin: 0; aspect-ratio: 1; max-width: 100% }
-.hero figcaption { font: 400 .74rem var(--mono); color: var(--muted); margin-top: 8px }
-.strip { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 2px solid var(--fg); margin-top: 8px }
-.strip div { padding: 16px 16px 14px; border-left: 1px solid var(--line); min-width: 0 }
-.strip div:first-child { border-left: 0; padding-left: 0 }
-.strip b { display: block; font: 800 clamp(2.2rem, 5vw, 3.4rem)/1 var(--display) }
-.strip span { font: 400 .76rem var(--mono); color: var(--muted) }
+    :root {
+      /* Teintes signatures Shindzela & Lin Naturel */
+      --sand-gold: #b5a48b;         /* Teinte sable dorée signature des titres */
+      --sand-dark: #8c7b64;         /* Sable foncé pour contrastes et survol */
+      --sand-light: #ece5da;        /* Lin clair pour fonds et bordures douces */
+      --sand-subtle: #f7f4ee;       /* Teinte crème pour les cartes secondaires */
+      
+      --bg-body: #faf8f5;           /* Fond général blanc lin chaud */
+      --bg-surface: #ffffff;        /* Surface des cartes et modules */
+      --bg-header: rgba(250, 248, 245, 0.94);
 
-.section { display: grid; gap: 32px }
-.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 40px; align-items: end; border-bottom: 2px solid var(--fg); padding-bottom: 16px }
-.head p { color: var(--muted); max-width: 52ch }
+      --text-heading: #262a30;      /* Ardoise profonde très douce */
+      --text-body: #4a5059;         /* Gris chaud pour une lecture reposante */
+      --text-muted: #79808d;        /* Gris taupe pour légendes et détails */
+      --text-sand: #9e8e75;
 
-.unit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start }
-.unit.flip > .visual { order: 2 }
-.visual { display: grid; gap: 8px; min-width: 0 }
-.shot { background: var(--plate); aspect-ratio: 4 / 3; overflow: hidden; max-width: 100% }
-.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
-.duo .shot { aspect-ratio: 1 }
-figure { margin: 0; min-width: 0 }
-figcaption, .cap { font: 400 .72rem/1.4 var(--mono); color: var(--muted); margin-top: 6px }
-svg.plan { display: block; width: 100%; height: 100%; color: var(--fg) }
-.plan .l { fill: none; stroke: currentColor; stroke-width: 2 }
-.plan .t { fill: none; stroke: currentColor; stroke-width: 1; opacity: .55 }
-.plan .a { fill: var(--accent); stroke: none }
-.plan .o { fill: var(--led); stroke: none }
-.plan .s { fill: var(--surface); stroke: currentColor; stroke-width: 2 }
-.plan text { font: 400 11px var(--mono); fill: var(--muted) }
+      --border-light: #eae4d8;      /* Liseré discret couleur ficelle */
+      --border-accent: #d8cebe;
 
-.info { display: grid; gap: 16px; min-width: 0 }
-.tag { font: 600 .74rem var(--mono); color: var(--led); text-transform: uppercase; letter-spacing: .08em }
-.info h3 { margin-top: -10px }
-dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 16px; margin: 0; font-size: .95rem; border-top: 1px solid var(--line) }
-dt, dd { margin: 0; padding: 6px 0; border-bottom: 1px solid var(--line) }
-dt { font: 400 .76rem/1.9 var(--mono); color: var(--muted) }
-.press { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: .95rem }
-.press li { padding-left: 16px; position: relative }
-.press li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--led) }
-.press .src { font-weight: 700 }
-.note { font-size: .84rem; color: var(--muted) }
+      --shadow-zen: 0 8px 30px rgba(181, 164, 139, 0.08);
+      --shadow-hover: 0 16px 40px rgba(181, 164, 139, 0.14);
 
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px }
-.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-.grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)) }
-.item { display: grid; gap: 12px; align-content: start; min-width: 0 }
-.item h3 { font-size: 1.7rem }
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
 
-.bays { background: var(--surface); border: 2px solid var(--fg); padding: 24px; display: grid; gap: 24px }
-.bays-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline }
-.bays-top h3 { font-size: clamp(2.2rem, 5vw, 3.4rem) }
-.bays-top span { font: 400 .8rem var(--mono); color: var(--muted) }
-.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
-.slot { background: var(--plate); padding: 16px; display: grid; gap: 4px; align-content: end; min-height: 170px; position: relative; min-width: 0 }
-.slot::after { content: ""; position: absolute; top: 14px; right: 14px; width: 9px; height: 9px; border-radius: 50%; background: var(--led) }
-.slot.hot { grid-column: span 2; background: var(--accent); color: var(--on-accent) }
-.slot.hot::after { background: var(--on-accent) }
-.slot b { font: 900 clamp(3.2rem, 8vw, 5.6rem)/.9 var(--display) }
-.slot.ssd b { font-size: clamp(2.4rem, 5vw, 3.2rem) }
-.slot small { font: 400 .76rem/1.4 var(--mono) }
+      --font-title: 'Marcellus', serif, system-ui;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+    }
 
-.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; counter-reset: s }
-.steps li { counter-increment: s; border-top: 2px solid var(--fg); padding-top: 10px; min-width: 0; font-size: .95rem }
-.steps li::before { content: counter(s); display: block; font: 900 3rem/1 var(--display); color: var(--accent) }
-.steps b { display: block; font-size: 1.05rem }
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.deals { width: 100%; border-collapse: collapse; font-size: .95rem; min-width: 620px }
-.deals th { font: 400 .74rem var(--mono); color: var(--muted); text-align: left; padding: 8px 16px 8px 0; border-bottom: 2px solid var(--fg) }
-.deals td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top }
-.deals td:first-child { font-weight: 700 }
-.deals td.n { font-family: var(--mono); white-space: nowrap; font-variant-numeric: tabular-nums }
-.scroll { overflow-x: auto }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+      font-size: 16px;
+    }
 
-.credits { border-top: 2px solid var(--fg); padding-top: 16px; font-size: .84rem; color: var(--muted); display: grid; gap: 10px }
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      line-height: 1.75;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-@media (max-width: 860px) {
-  .inner { padding-block: 56px }
-  .hero, .unit, .head, .space-head { grid-template-columns: minmax(0, 1fr) }
-  .unit.flip > .visual { order: 0 }
-  .grid, .grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .strip div:nth-child(odd) { border-left: 0; padding-left: 0 }
-  .strip div:nth-child(n+3) { border-top: 1px solid var(--line) }
-}
-@media (max-width: 520px) {
-  body { font-size: 16px }
-  .grid, .grid.two, .grid.four, .slots { grid-template-columns: minmax(0, 1fr) }
-  .slot.hot { grid-column: auto }
-  .bays { padding: 16px }
-}
-</style>
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
 
-<nav aria-label="Espaces">
-  <a class="n-game" href="#gaming">Gaming</a><a class="n-cine" href="#cinema">Cinéma</a><a class="n-serv" href="#serveur">Serveur</a><a class="n-net" href="#reseau">Réseau</a><a class="n-mob" href="#mobile">Mobile</a><a class="n-work" href="#travail">Travail</a><a href="#ratio">Bons coups</a>
-</nav>
-<main>
-<div class="inner">
-<header class="hero">
-  <div>
-    <h1>Le Parc <span>de Tristan</span></h1>
-    <p class="lede">Le matos que je choisis longtemps, que je garde longtemps, et que je paie le moins cher possible.</p>
-  </div>
-  <figure>
-    <div class="shot" style="aspect-ratio:1"><img src="photos/cpu-2.jpg" alt="Dessous d'un Ryzen 7 7800X3D décapsulé : les puces nues sur le substrat bleu"></div>
-    <figcaption>Ryzen 7 7800X3D, vu sans son capot. Le mien garde le sien.</figcaption>
-  </figure>
-  <div class="strip">
-    <div><b>96 Mo</b><span>de cache 3D dans le CPU</span></div>
-    <div><b>30 To</b><span>de disques durs dans le NAS</span></div>
-    <div><b>170 Hz</b><span>sur le M27Q du bureau</span></div>
-    <div><b>2 × 55"</b><span>d'OLED LG</span></div>
-  </div>
-</header>
-</div>
+    ::selection {
+      background: var(--sand-gold);
+      color: #ffffff;
+    }
 
-<section class="space" id="gaming">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Gaming</h2><p>Une tour de 18 litres qui joue comme une grosse, un écran 1440p à 170 Hz, une OLED pour les jeux solo et de quoi jouer à plusieurs.</p></header>
-<article class="unit">
-    <div class="visual">
-      <div class="duo">
-        <figure><div class="shot"><img src="photos/cpu-0.jpg" alt="Capot d'un AMD Ryzen 7 7800X3D"></div><figcaption>Le CPU qui fait tout le travail</figcaption></figure>
-        <figure><div class="shot">
-          <svg class="plan" viewBox="0 0 300 300" role="img" aria-label="Schéma d'une carte graphique à trois ventilateurs">
-            <rect class="s" x="24" y="108" width="252" height="84"/><circle class="l" cx="70" cy="150" r="30"/><circle class="l" cx="150" cy="150" r="30"/><circle class="l" cx="230" cy="150" r="30"/>
-            <circle class="a" cx="70" cy="150" r="8"/><circle class="a" cx="150" cy="150" r="8"/><circle class="a" cx="230" cy="150" r="8"/>
-            <path class="t" d="M24 212h252M24 206v12M276 206v12"/><text x="102" y="232">RTX 5070 Ti · 16 Go</text>
-          </svg></div><figcaption>Schéma, pas de photo libre de cette carte</figcaption></figure>
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+      padding-inline: 28px;
+    }
+
+    /* Boutons Zen Shindzela */
+    .btn-sand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sand-gold);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 12px 26px;
+      border-radius: 2px;
+      border: 1px solid var(--sand-gold);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-sand:hover {
+      background: var(--sand-dark);
+      border-color: var(--sand-dark);
+      box-shadow: 0 4px 16px rgba(140, 123, 100, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-body);
+      border: 1px solid var(--border-accent);
+    }
+    .btn-outline:hover {
+      background: var(--sand-subtle);
+      border-color: var(--sand-gold);
+      color: var(--sand-dark);
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION SHINDZELA
+       ========================================================================== */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-header);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 82px;
+      gap: 20px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-heading);
+      font-weight: 400;
+    }
+    .brand-subtitle {
+      font-size: 0.65rem;
+      font-family: var(--font-sans);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-sand);
+      margin-top: 3px;
+    }
+
+    nav.nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    nav.nav-menu a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      position: relative;
+      padding-block: 6px;
+    }
+    nav.nav-menu a:hover, nav.nav-menu a.active {
+      color: var(--sand-dark);
+    }
+    nav.nav-menu a.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--sand-gold);
+    }
+
+    /* ==========================================================================
+       HERO : L'ESPRIT DU PARC (Double colonne épurée)
+       ========================================================================== */
+    section.hero-zen {
+      padding-block: 76px 64px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-zen-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .hero-intro {
+      font-size: 1.12rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      max-width: 48ch;
+    }
+
+    .hero-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-block: 8px;
+    }
+    .hero-step-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.94rem;
+      color: var(--text-body);
+    }
+    .hero-step-num {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--sand-gold);
+      min-width: 24px;
+    }
+    .hero-step-text strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    /* Cadre photo Hero droite */
+    .hero-right {
+      position: relative;
+    }
+    .hero-frame {
+      background: var(--bg-surface);
+      padding: 12px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-zen);
+    }
+    .hero-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-sm);
+    }
+    .hero-caption {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ==========================================================================
+       TITRES DE SECTIONS : GRANDES CAPITALES ESPACÉES (STYLE SHINDZELA)
+       ========================================================================== */
+    section.zen-space {
+      padding-block: 84px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .space-heading-wrap {
+      text-align: center;
+      margin-bottom: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .space-kicker {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--sand-dark);
+    }
+
+    .space-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .space-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 58ch;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       CARTES DE MATÉRIEL (ÉPURÉES, BLANCHES SUR LIN)
+       ========================================================================== */
+    .zen-grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px;
+    }
+    .zen-grid-three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .zen-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-zen);
+      transition: all 0.3s ease;
+    }
+    .zen-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--sand-gold);
+    }
+
+    .zen-card-media {
+      position: relative;
+      background: var(--sand-subtle);
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .zen-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .zen-card:hover .zen-card-media img {
+      transform: scale(1.025);
+    }
+
+    /* Silhouette / Fiche technique zen quand pas de photo */
+    .zen-blueprint {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--sand-subtle) 100%);
+      text-align: center;
+      gap: 12px;
+    }
+    .blueprint-badge-zen {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--sand-dark);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      padding: 6px 16px;
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .blueprint-icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sand-gold);
+    }
+    .blueprint-icon-circle svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .zen-card-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 16px;
+    }
+
+    .zen-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .zen-category {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand-dark);
+      font-family: var(--font-mono);
+    }
+    .zen-hostname {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: var(--sand-subtle);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .zen-card-title {
+      font-family: var(--font-title);
+      font-size: 1.45rem;
+      letter-spacing: 0.06em;
+      color: var(--text-heading);
+      line-height: 1.25;
+      font-weight: 400;
+    }
+
+    .zen-card-pitch {
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: var(--text-body);
+    }
+
+    /* Fiche caractéristiques en tableau lin */
+    .zen-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      background: var(--sand-subtle);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      margin-block: 4px;
+      font-size: 0.84rem;
+    }
+    .zen-spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .zen-spec-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+    .zen-spec-val {
+      font-weight: 600;
+      color: var(--text-heading);
+    }
+
+    /* Avis de la presse / Sources */
+    .zen-reviews {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .zen-review-line {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .zen-review-src {
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .zen-review-link {
+      margin-left: auto;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--sand-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border-accent);
+    }
+    .zen-review-link:hover {
+      border-bottom-color: var(--sand-gold);
+      color: var(--sand-gold);
+    }
+
+    /* ==========================================================================
+       SERVEUR & STOCKAGE : PUMBA & L'ART DU SHUCKING
+       ========================================================================== */
+    .shuck-zen-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-zen);
+      margin-bottom: 36px;
+    }
+
+    .shuck-zen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 32px;
+    }
+    .shuck-zen-header h3 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      color: var(--text-heading);
+    }
+    .shuck-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--sand-dark);
+    }
+
+    /* Baies physiques en modules épurés */
+    .bays-strip {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .bay-unit {
+      background: var(--sand-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+    }
+    .bay-unit.primary {
+      background: #ffffff;
+      border-color: var(--sand-gold);
+    }
+    .bay-gb {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: var(--sand-gold);
+      line-height: 1;
+    }
+    .bay-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-top: 8px;
+    }
+    .bay-role {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Protocole de Shucking en liste numérotée (Directement inspiré de Shindzela) */
+    .shuck-guide {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 32px;
+    }
+    .shuck-guide h4 {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      margin-bottom: 12px;
+    }
+    .shuck-guide-intro {
+      font-size: 0.96rem;
+      color: var(--text-body);
+      margin-bottom: 24px;
+      max-width: 65ch;
+    }
+    .shuck-list-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .shuck-step-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+    .shuck-step-index {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--sand-gold);
+      font-size: 0.88rem;
+      min-width: 20px;
+    }
+    .shuck-step-desc strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       TABLEAU DES BONS COUPS : RATIONALITÉ & ÉCONOMIE
+       ========================================================================== */
+    .zen-table-wrap {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      box-shadow: var(--shadow-zen);
+    }
+    table.zen-deals {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.94rem;
+    }
+    table.zen-deals th {
+      background: var(--sand-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sand-dark);
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    table.zen-deals td {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-body);
+      vertical-align: middle;
+    }
+    table.zen-deals tr:last-child td {
+      border-bottom: none;
+    }
+    table.zen-deals tr:hover td {
+      background: #faf8f5;
+    }
+    .deal-item-name {
+      font-weight: 600;
+      color: var(--text-heading);
+    }
+    .deal-item-cost {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--sand-dark);
+      white-space: nowrap;
+    }
+    .deal-item-why {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       FOOTER & CRÉDITS
+       ========================================================================== */
+    footer.zen-footer {
+      padding-block: 70px 48px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-light);
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.8;
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .footer-credits strong {
+      color: var(--text-heading);
+    }
+    .footer-credits a {
+      color: var(--sand-dark);
+      border-bottom: 1px dotted var(--sand-gold);
+    }
+    .footer-credits a:hover {
+      color: var(--sand-gold);
+      border-bottom-style: solid;
+    }
+    .footer-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .hero-split { grid-template-columns: 1fr; gap: 40px; }
+      .hero-frame img { height: 300px; }
+      .zen-grid-two, .zen-grid-three { grid-template-columns: 1fr; }
+      .bays-strip { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .header-inner { flex-direction: column; height: auto; padding-block: 16px; gap: 12px; }
+      nav.nav-menu { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .bays-strip { grid-template-columns: 1fr; }
+      .hero-zen-title { font-size: 2.2rem; }
+      .space-title { font-size: 1.85rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- EN-TÊTE ÉPURÉ SHINDZELA -->
+  <header class="site-header" id="top">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#top" class="brand-wrap">
+          <span class="brand-title">Le Parc de Tristan</span>
+          <span class="brand-subtitle">Écosystème Matériel &amp; Studio</span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Espaces">
+          <a href="#gaming">Gaming</a>
+          <a href="#cinema">Cinéma</a>
+          <a href="#serveur">Serveur</a>
+          <a href="#reseau">Réseau</a>
+          <a href="#mobile">Mobilité</a>
+          <a href="#travail">Travail</a>
+          <a href="#deals">Bons coups</a>
+        </nav>
+
+        <a href="#deals" class="btn-sand">Consulter les prix</a>
       </div>
-      <figure><div class="shot" style="aspect-ratio:16/8">
-        <svg class="plan" viewBox="0 0 640 320" role="img" aria-label="Schéma coté du boîtier NR200P MAX">
-          <rect class="s" x="190" y="46" width="262" height="218"/>
-          <rect class="t" x="204" y="60" width="234" height="52"/><text x="228" y="90">AIO 280 mm, 2 × 140 mm</text>
-          <rect class="l" x="204" y="128" width="108" height="58"/><text x="222" y="161">Mini-ITX</text>
-          <rect class="a" x="204" y="200" width="234" height="16"/><text x="204" y="238">GPU vertical sur riser PCIe 4.0</text>
-          <rect class="l" x="330" y="128" width="108" height="58"/><text x="350" y="161">SFX 850 W</text>
-          <path class="t" d="M190 284h262M190 278v12M452 278v12"/><text x="300" y="306">18,25 litres</text>
-        </svg></div><figcaption>Schéma du NR200P MAX, tout est inclus d'usine sauf la carte mère et les composants</figcaption></figure>
     </div>
-    <div class="info">
-      <span class="tag">PC gamer · hostname Big Daddy</span>
-      <h3>Ryzen 7 7800X3D + RTX 5070 Ti</h3>
-      <p>La recette la plus rentable pour du jeu pur : un CPU à 8 cœurs qui ne consomme presque rien en jeu, une carte à 16 Go de VRAM, et un boîtier qui règle d'un coup le refroidissement et l'alimentation.</p>
-      <dl>
-        <dt>CPU</dt><dd>AMD Ryzen 7 7800X3D, 96 Mo de V-Cache 3D</dd>
-        <dt>GPU</dt><dd>NVIDIA GeForce RTX 5070 Ti 16 Go GDDR7</dd>
-        <dt>RAM</dt><dd>Corsair Vengeance DDR5 32 Go, 6000 MHz CL36 EXPO</dd>
-        <dt>SSD</dt><dd>NVMe PCIe 4.0, 4 To</dd>
-        <dt>Boîtier</dt><dd>Cooler Master NR200P MAX : AIO 280 mm et alim V850 SFX Gold inclus</dd>
-      </dl>
-      <ul class="press">
-        <li><span class="src">PC Gamer</span> y voit le meilleur processeur de jeu jamais sorti par AMD. <a href="https://pcgamer.com/amd-ryzen-7-7800x3d-review-benchmarks-performance">Lire</a></li>
-        <li><span class="src">Trusted Reviews</span> le classe de loin meilleur rapport qualité-prix AMD pour jouer à sa sortie. <a href="https://www.trustedreviews.com/reviews/amd-ryzen-7-7800x3d">Lire</a></li>
-        <li><span class="src">PCGamesN</span> en fait sa nouvelle carte 1440p préférée. <a href="https://www.pcgamesn.com/nvidia/geforce-rtx-5070-ti-review">Lire</a></li>
-        <li><span class="src">Tom's Hardware</span> parle d'un vrai GPU haut de gamme, surtout au prix conseillé. <a href="https://tomshardware.com/pc-components/gpus/nvidia-geforce-rtx-5070-ti-review-asus/5">Lire</a></li>
-        <li><span class="src">Tom's Hardware</span> décerne son Editor's Choice au NR200P MAX. <a href="https://tomshardware.com/reviews/cooler-master-nr200p-max-review">Lire</a></li>
-        <li><span class="src">KitGuru</span> lui met 9/10. <a href="https://www.kitguru.net/components/cases/james-dawson/cooler-master-masterbox-nr200p-max-review/">Lire</a></li>
-      </ul>
-    </div>
-  </article>
-<article class="unit flip">
-    <div class="visual">
-      <figure><div class="shot">
-        <svg class="plan" viewBox="0 0 480 360" role="img" aria-label="Schéma coté du moniteur Gigabyte M27Q">
-          <rect class="s" x="60" y="40" width="360" height="212"/><rect class="a" x="70" y="50" width="340" height="192" opacity=".16"/>
-          <text x="164" y="140">2560 × 1440 · 170 Hz</text><text x="196" y="160">IPS · KVM</text>
-          <path class="l" d="M240 252v44M190 296h100"/>
-          <path class="t" d="M60 22h360M60 16v12M420 16v12"/><text x="208" y="14">27 pouces</text>
-        </svg></div><figcaption>Schéma coté du Gigabyte M27Q</figcaption></figure>
-    </div>
-    <div class="info">
-      <span class="tag">Écran du bureau</span>
-      <h3>Gigabyte M27Q</h3>
-      <p>Le 27" 1440p qui a fait figure d'évidence : 170 Hz, un KVM intégré pour partager clavier et souris entre deux machines, et une RTX 5070 Ti qui remplit cette fréquence sans forcer.</p>
-      <dl>
-        <dt>Dalle</dt><dd>IPS 27", 2560 × 1440</dd>
-        <dt>Fréquence</dt><dd>170 Hz, FreeSync</dd>
-        <dt>Bonus</dt><dd>KVM intégré</dd>
-      </dl>
-      <ul class="press">
-        <li><span class="src">KitGuru</span> lui donne 9/10. <a href="https://www.kitguru.net/peripherals/james-morris/gigabyte-m27q-27in-170hz-gaming-monitor-review/">Lire</a></li>
-        <li><span class="src">RTINGS</span> retient les 170 Hz, le VRR et le KVM. <a href="https://www.rtings.com/monitor/reviews/gigabyte/m27q">Lire</a></li>
-        <li><span class="src">Monitor Nerds</span> salue un écran de jeu complet et une très bonne dalle. <a href="https://monitornerds.com/gigabyte-m27q-review/">Lire</a></li>
-      </ul>
-    </div>
-  </article>
-  <h3 class="sub">Autour de la tour</h3>
+  </header>
 
-<div class="grid">
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 400 300" role="img" aria-label="Schéma d'un téléviseur OLED sur pied">
-          <rect class="s" x="40" y="48" width="320" height="180"/><rect class="o" x="48" y="56" width="304" height="164" opacity=".2"/>
-          <text x="116" y="142">4K · 120 Hz · G-Sync</text><path class="l" d="M200 228v22M130 250h140"/><text x="176" y="282">55 pouces</text>
-        </svg></div>
-      <span class="tag">Jeux solo</span>
-      <h3>LG OLED 55C9</h3>
-      <p>La TV de 2019 qui a lancé le HDMI 2.1 complet sur ses quatre ports. Je l'utilise pour les RPG à la manette, et elle n'a rien perdu.</p>
-      <ul class="press">
-        <li><span class="src">RTINGS</span> la jugeait excellente, avec des noirs parfaits en pièce sombre. <a href="https://www.rtings.com/tv/reviews/lg/c9-oled">Lire</a></li>
-      </ul>
-    </article>
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 300 300" role="img" aria-label="Schéma d'une souris en forme d'œuf"><path class="s" d="M150 40c56 0 78 66 78 124s-30 96-78 96-78-38-78-96 22-124 78-124z"/><path class="l" d="M150 40v70M72 150h156"/><rect class="a" x="143" y="62" width="14" height="32" rx="7"/><text x="110" y="200">~ 50 g</text></svg></div>
-      <span class="tag">Jeu</span>
-      <h3>Zaopin Z1 Pro 4K</h3>
-      <p>Mini souris en œuf, très légère, PAW3395 et 4000 Hz sans fil, pour le prix d'un jeu.</p>
-      <ul class="press"><li><span class="src">TechPowerUp</span> a testé la version d'origine et salue son capteur, son sans-fil et sa latence de clic. <a href="https://www.techpowerup.com/review/zaopin-z1-pro/single-page.html">Lire</a></li></ul>
-    </article>
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 300 300" role="img" aria-label="Schéma d'un clavier compact"><rect class="s" x="30" y="108" width="240" height="88"/><path class="t" d="M30 130h240M30 152h240M30 174h240M70 108v88M110 108v88M150 108v88M190 108v88M230 108v88"/><circle class="o" cx="256" cy="96" r="6"/><text x="92" y="226">TKL low-profile</text></svg></div>
-      <span class="tag">Jeu</span>
-      <h3>Logitech G915 TKL</h3>
-      <p>Mécanique extra-plat, aluminium brossé, Lightspeed. Le seul achat sans excuse budgétaire du bureau.</p>
-      <ul class="press"><li><span class="src">T3</span> le juge superbe. <a href="https://www.t3.com/us/reviews/logitech-g915-tkl-review">Lire</a></li><li><span class="src">Digital Trends</span> estime qu'il mérite son prix. <a href="https://www.digitaltrends.com/computing/logitech-g915-lightspeed-tkl-review/">Lire</a></li></ul>
-    </article>
-</div>
-  <h3 class="sub">Les manettes</h3>
+  <main>
+    <!-- HERO SECTION : INSPIRATION SHINDZELA -->
+    <section class="hero-zen">
+      <div class="container">
+        <div class="hero-split">
+          <div class="hero-left">
+            <h1 class="hero-zen-title">L E &nbsp; P A R C</h1>
+            <p class="hero-intro">Le matériel que je choisis patiemment, que j'optimise en silence, et que je rentabilise au centime près. Sans encombrement, sans bruit parasite, pour traverser les années.</p>
 
-<div class="grid">
-    <figure><div class="shot"><img src="photos/xbox-blanche.jpg" alt="Manette Xbox blanche devant une console"></div><figcaption>Xbox blanche · photo du modèle</figcaption></figure>
-    <figure><div class="shot"><img src="photos/xbox-bleue.jpg" alt="Manette Xbox bleue"></div><figcaption>Xbox bleue · photo du modèle</figcaption></figure>
-    <figure><div class="shot"><img src="photos/xbox-noire.jpg" alt="Manette Xbox noire"></div><figcaption>Xbox noire · photo du modèle</figcaption></figure>
-  </div>
-<div class="grid two">
-<article class="item">
-      <span class="tag">La référence</span>
-      <h3>Manettes Xbox sans fil</h3>
-      <p>La forme que tout le monde sait tenir, reconnue partout sous Windows, et que l'on trouve bien sous son prix public en promo.</p>
-      <ul class="press">
-        <li><span class="src">Windows Central</span> l'a classée meilleure manette Xbox de son guide, et lui met 4 étoiles. <a href="https://www.windowscentral.com/best-xbox-controller">Lire</a></li>
-        <li><span class="src">Custom PC</span> lui donne 82 % pour son confort et sa compatibilité Windows. <a href="https://www.custompc.com/microsoft-xbox-wireless-controller-review">Lire</a></li>
-      </ul>
-    </article>
-<article class="item">
-      <span class="tag">Le coup malin</span>
-      <h3>GameSir Nova 2 Lite</h3>
-      <figure><div class="shot" style="aspect-ratio:16/8">
-        <svg class="plan" viewBox="0 0 480 240" role="img" aria-label="Schéma de manette avec sticks à effet Hall">
-          <path class="s" d="M120 54h240c34 0 52 34 66 96 8 36-22 56-46 26l-26-32H126l-26 32c-24 30-54 10-46-26 14-62 32-96 66-96z"/>
-          <circle class="a" cx="164" cy="98" r="22"/><circle class="a" cx="290" cy="128" r="22"/>
-          <path class="l" d="M196 118v24M184 130h24"/>
-          <circle class="o" cx="340" cy="84" r="6"/><circle class="o" cx="358" cy="100" r="6"/><circle class="o" cx="322" cy="100" r="6"/><circle class="o" cx="340" cy="116" r="6"/>
-          <text x="118" y="222">sticks et gâchettes à effet Hall</text>
-        </svg></div><figcaption>Schéma, pas de photo libre de cette manette</figcaption></figure>
-      <p>Sticks et gâchettes à effet Hall, 1000 Hz, Bluetooth, dongle ou filaire, pour environ 30 $ en prix public.</p>
-      <ul class="press">
-        <li><span class="src">HLPlanet</span> trouve ses sticks nettement meilleurs que ceux de la première Nova Lite et ses gâchettes bien réussies. <a href="https://www.hlplanet.com/?p=5460">Lire</a></li>
-        <li><span class="src">TechRadar</span> recommandait déjà la première Nova Lite, ce qui est rare à ce prix. <a href="https://www.techradar.com/gaming/gamesir-nova-lite-controller-review">Lire</a></li>
-      </ul>
-    </article>
-</div>
-</div>
-</section>
-<section class="space" id="cinema">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Cinéma</h2><p>Le salon : la meilleure image de la maison, et une box de 2015 qui refuse de vieillir.</p></header>
-<div class="grid two">
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 400 300" role="img" aria-label="Schéma d'un téléviseur OLED fixé au mur">
-          <rect class="s" x="40" y="56" width="320" height="180"/><rect class="a" x="48" y="64" width="304" height="164" opacity=".22"/>
-          <text x="128" y="150">4K · 144 Hz · MLA</text><path class="t" d="M40 256h320M40 250v12M360 250v12"/><text x="176" y="278">55 pouces</text>
-        </svg></div>
-      <span class="tag">Home-cinéma</span>
-      <h3>LG OLED evo 55G4</h3>
-      <p>Le vaisseau amiral LG 2024 : dalle MLA, processeur α11, 144 Hz et Dolby Vision. Mon achat plaisir, assumé.</p>
-      <ul class="press">
-        <li><span class="src">Tom's Guide</span> lui donne son Editor's Choice. <a href="https://www.tomsguide.com/tvs/lg-g4-oled-review">Lire</a></li>
-        <li><span class="src">RTINGS</span> note le 65" 8,6 au global. <a href="https://www.rtings.com/tv/reviews/lg/g4">Lire</a></li>
-        <li><span class="src">Home Theater Review</span> en fait le meilleur OLED testé par son auteur en 2024. <a href="https://hometheaterreview.com/the-best-oled-ive-ever-tested-2024-lg-g4-review">Lire</a></li>
-      </ul>
-    </article>
-<article class="item">
-      <div class="shot"><img src="photos/shield.jpg" alt="Une NVIDIA Shield Android TV de première génération ouverte en deux"></div>
-      <span class="tag">Client Plex</span>
-      <h3>NVIDIA Shield TV 2015</h3>
-      <p>199 € à sa sortie, onze ans plus tard elle lit presque tout en direct, Dolby Atmos et DTS-HD compris. Le NAS ne transcode rien.</p>
-      <p class="cap">La même génération, ouverte. La mienne reste fermée.</p>
-      <ul class="press">
-        <li><span class="src">Engadget</span> la disait meilleure box Android du marché. <a href="https://www.engadget.com/2015-06-21-nvidia-shield-tv-review.html">Lire</a></li>
-        <li><span class="src">AnandTech</span> la voyait en référence incontestée d'Android TV. <a href="https://www.anandtech.com/show/9289/the-nvidia-shield-android-tv-review/10">Lire</a></li>
-      </ul>
-    </article>
-</div>
-</div>
-</section>
-<section class="space" id="serveur">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Serveur &amp; stockage</h2><p>La pièce dont je suis le plus fier, parce que c'est celle où l'astuce rapporte le plus.</p></header>
-<div class="bays">
-    <div class="bays-top"><h3>UGREEN DXP2800 · Pumba</h3><span>31,5 To · Intel N100 · 8 Go DDR5 · 2,5 GbE</span></div>
-    <div class="slots">
-      <div class="slot hot"><b>18 To</b><small>Baie 1 · Seagate Expansion démonté, hélium. Films et séries.</small></div>
-      <div class="slot"><b>12 To</b><small>Baie 2 · disque externe démonté lui aussi, hélium. Séries.</small></div>
-      <div class="slot ssd"><b>1 To</b><small>Slot M.2 n° 1 · NVMe. Sorties récentes et VM Home Assistant.</small></div>
-      <div class="slot ssd"><b>500 Go</b><small>Slot M.2 n° 2 · NVMe. Conteneurs Docker et base Plex.</small></div>
-      <div class="slot ssd"><b>N100</b><small>6 W de TDP, QuickSync pour le transcodage Plex 4K.</small></div>
-    </div>
-  </div>
+            <div class="hero-steps">
+              <div class="hero-step-item">
+                <span class="hero-step-num">1.</span>
+                <span class="hero-step-text"><strong>96 Mo de cache 3D :</strong> Processeur Ryzen 7 7800X3D pour une efficacité énergétique absolue en jeu.</span>
+              </div>
+              <div class="hero-step-item">
+                <span class="hero-step-num">2.</span>
+                <span class="hero-step-text"><strong>31,5 To de stockage hybride :</strong> Disques d'entreprise déshabillés et mémoire NVMe silencieuse.</span>
+              </div>
+              <div class="hero-step-item">
+                <span class="hero-step-num">3.</span>
+                <span class="hero-step-text"><strong>170 Hz &bull; 1440p :</strong> Dalle Fast IPS avec commutateur KVM physique pour un bureau libéré.</span>
+              </div>
+              <div class="hero-step-item">
+                <span class="hero-step-num">4.</span>
+                <span class="hero-step-text"><strong>2 × 55 pouces d'OLED LG :</strong> Le summum du contraste pour les RPG solo et le home-cinéma.</span>
+              </div>
+            </div>
 
-  <div class="unit">
-    <div class="visual">
-      <figure><div class="shot"><img src="photos/hdd-ouvert.jpg" alt="Disque dur 3,5 pouces ouvert, plateaux et bras visibles"></div><figcaption>Dans un disque dur, sans le capot. Photo d'illustration.</figcaption></figure>
-      <div class="duo">
-        <figure><div class="shot"><img src="photos/hdd-helium.jpg" alt="Soudure du capot d'un disque dur rempli d'hélium en macro"></div><figcaption>Le capot soudé d'un disque hélium. Illustration.</figcaption></figure>
-        <figure><div class="shot"><img src="photos/hdd-profil.jpg" alt="Disque dur 3,5 pouces vu de profil"></div><figcaption>Le format 3,5" de profil. Illustration.</figcaption></figure>
+            <div class="hero-actions">
+              <a href="#gaming" class="btn-sand">Explorer le matériel</a>
+              <a href="#serveur" class="btn-sand btn-outline">L'astuce du Shucking</a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-frame">
+              <img src="photos/cpu-2.jpg" alt="Processeur AMD Ryzen 7 7800X3D vu sans son capot">
+              <p class="hero-caption">Ryzen 7 7800X3D décapsulé : les dies de calcul et le cache empilé.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01. ESPACE GAMING -->
+    <section class="zen-space" id="gaming">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 01</span>
+          <h2 class="space-title">G A M I N G</h2>
+          <p class="space-desc">Une tour Mini-ITX compacte de 18 litres, un affichage ultra-fluide à 170 Hz, et une dalle OLED dédiée aux immersions solo à la manette.</p>
+        </div>
+
+        <div class="zen-grid-two">
+          <!-- Big Daddy -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <img src="photos/cpu-0.jpg" alt="Capot d'un AMD Ryzen 7 7800X3D">
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Tour Mini-ITX SFF</span>
+                <span class="zen-hostname">Big Daddy</span>
+              </div>
+              <h3 class="zen-card-title">Ryzen 7 7800X3D &bull; RTX 5070 Ti</h3>
+              <p class="zen-card-pitch">La formule la plus équilibrée pour le jeu moderne : un CPU à 8 cœurs qui ne chauffe presque pas en charge, 16 Go de VRAM haute vitesse, et un boîtier pré-équipé qui règle d'emblée l'alimentation et le refroidissement.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">CPU</span><span class="zen-spec-val">Ryzen 7 7800X3D (96 Mo V-Cache)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">GPU</span><span class="zen-spec-val">GeForce RTX 5070 Ti 16 Go GDDR7</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">RAM</span><span class="zen-spec-val">Corsair 32 Go DDR5 6000 EXPO</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Châssis</span><span class="zen-spec-val">NR200P MAX (AIO 280mm + 850W Gold)</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">PC Gamer</span>
+                  <span>« Le meilleur processeur de jeu pur jamais conçu par AMD. »</span>
+                  <a class="zen-review-link" href="https://pcgamer.com/amd-ryzen-7-7800x3d-review-benchmarks-performance" target="_blank" rel="noopener">Lire</a>
+                </div>
+                <div class="zen-review-line">
+                  <span class="zen-review-src">Tom's Hardware</span>
+                  <span>Editor's Choice décerné au boîtier Cooler Master NR200P MAX.</span>
+                  <a class="zen-review-link" href="https://tomshardware.com/reviews/cooler-master-nr200p-max-review" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Écran Gigabyte M27Q -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">2560 × 1440 &bull; 170 HZ &bull; COMMUTATEUR KVM</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Écran de bureau</span>
+                <span class="zen-hostname">Fast IPS &bull; 27"</span>
+              </div>
+              <h3 class="zen-card-title">Gigabyte M27Q (1440p &bull; 170 Hz)</h3>
+              <p class="zen-card-pitch">Le 27 pouces QHD qui allie travail et réactivité esport : 170 Hz rassasiés par la 5070 Ti, et un commutateur KVM physique pour basculer instantanément clavier et souris vers le PC portable d'un simple appui.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">Dalle</span><span class="zen-spec-val">IPS 27 pouces (2560 × 1440)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Fréquence</span><span class="zen-spec-val">170 Hz FreeSync Premium</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">KVM</span><span class="zen-spec-val">Partage USB-C / USB-B physique</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Réponse</span><span class="zen-spec-val">0.5 ms MPRT</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">RTINGS</span>
+                  <span>« Remarquable fluidité de mouvement et KVM intégré très pratique. »</span>
+                  <a class="zen-review-link" href="https://www.rtings.com/monitor/reviews/gigabyte/m27q" target="_blank" rel="noopener">Lire</a>
+                </div>
+                <div class="zen-review-line">
+                  <span class="zen-review-src">KitGuru</span>
+                  <span>Note de 9/10 pour sa polyvalence bureautique et jeu.</span>
+                  <a class="zen-review-link" href="https://www.kitguru.net/peripherals/james-morris/gigabyte-m27q-27in-170hz-gaming-monitor-review/" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Périphériques gaming -->
+        <div style="margin-top: 36px;" class="zen-grid-three">
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">TV RPG Solo</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">LG OLED 55C9 (55")</h3>
+              <p class="zen-card-pitch">Dalle 4K 120Hz HDMI 2.1 connectée au PC pour les jeux solo immersifs à la manette dans le canapé.</p>
+              <div class="zen-review-line" style="margin-top: auto; padding-top: 12px;">
+                <span class="zen-review-src">RTINGS</span>
+                <span>Noirs parfaits et G-Sync natif.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">Souris Précision</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">Zaopin Z1 Pro 4K (~50g)</h3>
+              <p class="zen-card-pitch">Coquille d'œuf ultralégère, capteur PAW3395 et polling rate 4000 Hz sans fil au tarif d'une souris standard.</p>
+              <div class="zen-review-line" style="margin-top: auto; padding-top: 12px;">
+                <span class="zen-review-src">TechPowerUp</span>
+                <span>Précision et réactivité exemplaires.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">Clavier Mécanique</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">Logitech G915 TKL</h3>
+              <p class="zen-card-pitch">Châssis en aluminium brossé extra-plat, switches linéaires low-profile et transmission Lightspeed sans latence.</p>
+              <div class="zen-review-line" style="margin-top: auto; padding-top: 12px;">
+                <span class="zen-review-src">Digital Trends</span>
+                <span>L'un des claviers les plus élégants du marché.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manettes -->
+        <div style="margin-top: 36px;" class="zen-grid-two">
+          <div class="zen-card">
+            <div class="zen-card-media" style="aspect-ratio: 16/9;">
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); height: 100%;">
+                <img src="photos/xbox-blanche.jpg" alt="Manette Xbox blanche">
+                <img src="photos/xbox-bleue.jpg" alt="Manette Xbox bleue">
+                <img src="photos/xbox-noire.jpg" alt="Manette Xbox noire">
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <span class="zen-category">Multijoueur Convivial</span>
+              <h3 class="zen-card-title">Manettes Xbox sans fil</h3>
+              <p class="zen-card-pitch">Ergonomie universelle reconnue sous Windows et SteamOS sans aucun pilote. Parfait pour les sessions à plusieurs entre amis.</p>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-media" style="aspect-ratio: 16/9;">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M6 11h4M8 9v4M15 12h.01M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">STICKS ET GÂCHETTES EFFET HALL &bull; 1000 HZ &bull; ~30 $</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Le Coup Malin</span>
+                <span class="zen-hostname">Anti-Drift</span>
+              </div>
+              <h3 class="zen-card-title">GameSir Nova 2 Lite</h3>
+              <p class="zen-card-pitch">Sticks et gâchettes magnétiques à effet Hall (sans frottement mécanique, inusables), polling rate 1000 Hz et triple connectivité pour le tiers du prix officiel.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 02. ESPACE CINÉMA -->
+    <section class="zen-space" id="cinema">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 02</span>
+          <h2 class="space-title">C I N É M A</h2>
+          <p class="space-desc">Le salon : la meilleure qualité d'image du marché associée à une box multimédia de 2015 qui transmet le son et l'image sans aucune dégradation.</p>
+        </div>
+
+        <div class="zen-grid-two">
+          <!-- LG G4 -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="15" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">DALLE MLA &bull; α11 AI &bull; 144 HZ &bull; DOLBY VISION</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Home-Cinéma Salon</span>
+                <span class="zen-hostname">Flagship 2024</span>
+              </div>
+              <h3 class="zen-card-title">LG OLED evo 55G4 (Dalle MLA)</h3>
+              <p class="zen-card-pitch">Le vaisseau amiral OLED : microlentilles MLA pour un pic de luminosité éclatant, processeur Alpha 11 et gestion chirurgicale des noirs dans les scènes obscures. Mon achat plaisir assumé.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">Dalle</span><span class="zen-spec-val">OLED MLA 55" (4K HDR)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Moteur</span><span class="zen-spec-val">Processeur α11 4K AI</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Normes</span><span class="zen-spec-val">Dolby Vision, Atmos, Filmmaker</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Support</span><span class="zen-spec-val">Fixation murale ultra-plate</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">Tom's Guide</span>
+                  <span>« Editor's Choice — L'une des images les plus saisissantes du marché. »</span>
+                  <a class="zen-review-link" href="https://www.tomsguide.com/tvs/lg-g4-oled-review" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Shield TV -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <img src="photos/shield.jpg" alt="Box NVIDIA Shield Android TV de 2015">
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Client Plex Salon</span>
+                <span class="zen-hostname">11 ans de service</span>
+              </div>
+              <h3 class="zen-card-title">NVIDIA Shield Android TV (2015)</h3>
+              <p class="zen-card-pitch">Achetée 199 € en 2015 : onze ans plus tard, elle décode nativement l'intégralité des flux 4K, Dolby TrueHD Atmos et DTS-HD Master Audio en Direct Play sans que le serveur n'ait à transcoder.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">Processeur</span><span class="zen-spec-val">NVIDIA Tegra X1</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Décodage</span><span class="zen-spec-val">Direct Play 4K &bull; Zéro Transcodage</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Audio HD</span><span class="zen-spec-val">Passthrough TrueHD &bull; DTS:X</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Longévité</span><span class="zen-spec-val">Actif quotidien depuis 11 ans</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">AnandTech</span>
+                  <span>« La référence historique et indétrônable du multimédia de salon. »</span>
+                  <a class="zen-review-link" href="https://www.anandtech.com/show/9289/the-nvidia-shield-android-tv-review/10" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. ESPACE SERVEUR & STOCKAGE -->
+    <section class="zen-space" id="serveur">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 03</span>
+          <h2 class="space-title">S E R V E U R</h2>
+          <p class="space-desc">La pièce d'ingénierie la plus gratifiante : 31,5 To de stockage haute densité, des disques d'entreprise déshabillés au tiers du prix, et un silence complet au quotidien.</p>
+        </div>
+
+        <div class="shuck-zen-box">
+          <div class="shuck-zen-header">
+            <div>
+              <h3>UGREEN NASync DXP2800 &bull; Surnommé Pumba</h3>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">Intel N100 (6W) &bull; 8 Go DDR5 &bull; 2.5 GbE &bull; QuickSync 4K</p>
+            </div>
+            <span class="shuck-tagline">31,5 To Hybride &bull; VM Home Assistant &bull; Plex</span>
+          </div>
+
+          <!-- Modules de baies -->
+          <div class="bays-strip">
+            <div class="bay-unit primary">
+              <div>
+                <span class="zen-category">Baie 1 &bull; Shucké</span>
+                <div class="bay-gb">18 To</div>
+                <div class="bay-title">Seagate Expansion Hélium</div>
+              </div>
+              <div class="bay-role">Disque entreprise 3.5" hélium. Films &amp; séries. Coût : 13,9 € / To.</div>
+            </div>
+
+            <div class="bay-unit">
+              <div>
+                <span class="zen-category">Baie 2 &bull; Shucké</span>
+                <div class="bay-gb">12 To</div>
+                <div class="bay-title">Disque Externe 3.5" Hélium</div>
+              </div>
+              <div class="bay-role">Stockage séries &amp; archives. Disques en veille 90% du temps.</div>
+            </div>
+
+            <div class="bay-unit">
+              <div>
+                <span class="zen-category">Slot M.2 n°1</span>
+                <div class="bay-gb" style="font-size: 1.8rem;">1 To</div>
+                <div class="bay-title">NVMe Téléchargements &amp; VM</div>
+              </div>
+              <div class="bay-role">Sorties récentes et Machine Virtuelle Home Assistant OS (zéro bruit).</div>
+            </div>
+
+            <div class="bay-unit">
+              <div>
+                <span class="zen-category">Slot M.2 n°2</span>
+                <div class="bay-gb" style="font-size: 1.8rem;">500 Go</div>
+                <div class="bay-title">NVMe Système &amp; Plex</div>
+              </div>
+              <div class="bay-role">Base de données Plex, métadonnées instantanées et conteneurs Docker.</div>
+            </div>
+          </div>
+
+          <!-- Guide Shucking inspiré Shindzela -->
+          <div class="shuck-guide">
+            <h4>L'art du « Shucking » expliqué pas à pas</h4>
+            <p class="shuck-guide-intro">Un disque externe grand public en promotion coûte souvent 30 à 40 % moins cher que le même disque vendu nu aux professionnels. J'achète l'externe, je l'ouvre proprement et j'intègre le disque hélium dans le NAS.</p>
+
+            <div class="shuck-list-steps">
+              <div class="shuck-step-row">
+                <span class="shuck-step-index">1.</span>
+                <div class="shuck-step-desc"><strong>Veille promotionnelle :</strong> Repérer une remise sur un gros disque de bureau (Seagate Expansion 18 To en mars 2025 à 250 €).</div>
+              </div>
+              <div class="shuck-step-row">
+                <span class="shuck-step-index">2.</span>
+                <div class="shuck-step-desc"><strong>Déshabillage minutieux :</strong> Déclipser la coque plastique externe sans forcer pour libérer le disque 3.5" scellé à l'hélium.</div>
+              </div>
+              <div class="shuck-step-row">
+                <span class="shuck-step-index">3.</span>
+                <div class="shuck-step-desc"><strong>Montage en baie :</strong> Fixer le disque nu dans le tiroir du DXP2800. Le NAS reconnaît immédiatement l'unité.</div>
+              </div>
+              <div class="shuck-step-row">
+                <span class="shuck-step-index">4.</span>
+                <div class="shuck-step-desc"><strong>Recyclage protecteur :</strong> Conserver la coque externe d'origine comme étui de protection en cas de transport ou déménagement.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galerie HDD -->
+        <div class="zen-grid-three">
+          <div class="zen-card">
+            <div class="zen-card-media" style="aspect-ratio: 16/11;">
+              <img src="photos/hdd-ouvert.jpg" alt="Intérieur d'un disque dur 3.5 pouces">
+            </div>
+            <div class="zen-card-body" style="padding: 20px;">
+              <span class="zen-category">Mécanique</span>
+              <p class="zen-card-pitch" style="font-size: 0.84rem;">Plateaux magnétiques et bras de lecture d'un disque 3.5" (illustration).</p>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-media" style="aspect-ratio: 16/11;">
+              <img src="photos/hdd-helium.jpg" alt="Soudure au laser du capot d'un disque hélium">
+            </div>
+            <div class="zen-card-body" style="padding: 20px;">
+              <span class="zen-category">Soudure Laser</span>
+              <p class="zen-card-pitch" style="font-size: 0.84rem;">Capot étanche soudé contenant l'hélium pour réduire friction et chauffe.</p>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-media" style="aspect-ratio: 16/11;">
+              <img src="photos/hdd-profil.jpg" alt="Disque dur 3.5 pouces de profil">
+            </div>
+            <div class="zen-card-body" style="padding: 20px;">
+              <span class="zen-category">Format 3.5"</span>
+              <p class="zen-card-pitch" style="font-size: 0.84rem;">Le format historique le plus rentable du marché pour le stockage massif.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04. ESPACE RÉSEAU -->
+    <section class="zen-space" id="reseau">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 04</span>
+          <h2 class="space-title">R É S E A U</h2>
+          <p class="space-desc">L'infrastructure invisible qui relie chaque appareil à 2,5 Gbit/s et pilote la maison en local sans dépendance au cloud.</p>
+        </div>
+
+        <div class="zen-grid-two">
+          <!-- TP-Link Deco BE65 -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">WI-FI 7 BE9300 &bull; 8 × PORTS 2.5 GBE</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Mesh Wi-Fi 7</span>
+                <span class="zen-hostname">Multi-Gigabit</span>
+              </div>
+              <h3 class="zen-card-title">TP-Link Deco BE65 (Pack de 2)</h3>
+              <p class="zen-card-pitch">Réseau maillé tri-bande exploitant la bande ultra-rapide des 6 GHz. Avec 8 ports Ethernet 2,5 GbE au total, le PC et le NAS communiquent à débit maximal sans aucun goulet d'étranglement.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">Norme</span><span class="zen-spec-val">Wi-Fi 7 (802.11be) BE9300</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Ports</span><span class="zen-spec-val">4 ports 2.5 GbE par borne</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Liaison</span><span class="zen-spec-val">Backhaul 6 GHz dédié</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Portée</span><span class="zen-spec-val">Logement entier sans coupure</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">Blacktubi</span>
+                  <span>« Débits impressionnants en Wi-Fi 7 et stabilité filaire exemplaire. »</span>
+                  <a class="zen-review-link" href="https://www.blacktubi.com/review/deco-be65/" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Home Assistant + Zigbee -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">HOME ASSISTANT OS &bull; ZIGBEE 3.0 POE DÉPORTÉ</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Domotique Locale</span>
+                <span class="zen-hostname">Zéro Cloud</span>
+              </div>
+              <h3 class="zen-card-title">Home Assistant &bull; SMLIGHT SLZB-06</h3>
+              <p class="zen-card-pitch">Une maison autonome pilotée par Home Assistant en VM sur le NAS. L'antenne Zigbee est déportée au centre de l'habitat et alimentée en Ethernet PoE pour une transmission radio optimale.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">Instance</span><span class="zen-spec-val">HA OS en Machine Virtuelle</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Antenne</span><span class="zen-spec-val">SMLIGHT SLZB-06 (EFR32MG21)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Alim</span><span class="zen-spec-val">PoE (Power over Ethernet)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Périphériques</span><span class="zen-spec-val">~90 entités (Thermostats, Linky, Volets)</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">Architecture</span>
+                  <span>Régulation thermique fil pilote, téléinformation Linky et sécurité 100% locale.</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. ESPACE MOBILITÉ -->
+    <section class="zen-space" id="mobile">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 05</span>
+          <h2 class="space-title">M O B I L I T É</h2>
+          <p class="space-desc">Tout ce qui quitte le bureau ou accompagne les voyages : jeu portable en streaming, isolation acoustique totale et standardisation USB-C.</p>
+        </div>
+
+        <div class="zen-grid-two">
+          <!-- Steam Deck LCD 1 To -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <img src="photos/deck-face.jpg" alt="Valve Steam Deck de face">
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Console Portable</span>
+                <span class="zen-hostname">Passée à 1 To NVMe</span>
+              </div>
+              <h3 class="zen-card-title">Valve Steam Deck LCD</h3>
+              <p class="zen-card-pitch">Modèle de base acquis puis équipé d'un SSD 2230 de 1 To pour 80 €. En streaming local Moonlight depuis le PC Big Daddy, il décode simplement un flux 60 fps : autonomie décuplée, console froide et silence complet.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">APU</span><span class="zen-spec-val">AMD Zen 2 + RDNA 2 (16 Go LPDDR5)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Stockage</span><span class="zen-spec-val">1 To NVMe PCIe (format M.2 2230)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Écran</span><span class="zen-spec-val">7" IPS 1280 × 800 (60 Hz)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Usage</span><span class="zen-spec-val">Jeux indés + Moonlight local</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">TechRadar</span>
+                  <span>« Une console portable d'une polyvalence formidable. »</span>
+                  <a class="zen-review-link" href="https://www.techradar.com/news/steam-deck" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bose QC SC -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">RÉDUCTION BRUIT ACTIVE &bull; 24H AUTONOMIE &bull; MULTIPOINT</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Audio &amp; Isolation</span>
+                <span class="zen-hostname">Poids plume : ~240g</span>
+              </div>
+              <h3 class="zen-card-title">Bose QuietComfort SC</h3>
+              <p class="zen-card-pitch">La bulle de calme pour la concentration et les trajets : réduction de bruit active réputée, coussinets ultra-doux et Bluetooth multipoint pour passer du téléphone au PC sans déconnexion.</p>
+
+              <div class="zen-specs">
+                <div class="zen-spec-item"><span class="zen-spec-label">ANC</span><span class="zen-spec-val">Active hybride (Modes Quiet &amp; Aware)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Batterie</span><span class="zen-spec-val">24 heures (recharge rapide USB-C)</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Multipoint</span><span class="zen-spec-val">Bascule 2 appareils simultanés</span></div>
+                <div class="zen-spec-item"><span class="zen-spec-label">Poids</span><span class="zen-spec-val">240 grammes</span></div>
+              </div>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">RTINGS</span>
+                  <span>« Isolation exceptionnelle contre les bruits graves et médiums. »</span>
+                  <a class="zen-review-link" href="https://rtings.com/headphones/reviews/bose/quietcomfort-headphones-wireless" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Compagnons -->
+        <div style="margin-top: 36px;" class="zen-grid-three">
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">Tablette 2-en-1</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">Surface Pro 7 (Juanito)</h3>
+              <p class="zen-card-pitch">Écran PixelSense 3:2 avec Type Cover. L'outil idéal pour le canapé, l'administration réseau et la consultation des dashboards domotiques.</p>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">Smartphone</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">Google Pixel 9 Pro</h3>
+              <p class="zen-card-pitch">Dalle Super Actua 120 Hz, Tensor G4, 16 Go de mémoire et liaison Wi-Fi 7 avec le réseau domestique.</p>
+            </div>
+          </div>
+
+          <div class="zen-card">
+            <div class="zen-card-body">
+              <span class="zen-category">Montre Connectée</span>
+              <h3 class="zen-card-title" style="font-size: 1.25rem;">OnePlus Watch (Wear OS)</h3>
+              <p class="zen-card-pitch">Double processeur intelligent et 100 heures d'autonomie réelle. Suivi santé, biomarqueurs et commandes Home Assistant au poignet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. ESPACE TRAVAIL -->
+    <section class="zen-space" id="travail">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 06</span>
+          <h2 class="space-title">T R A V A I L</h2>
+          <p class="space-desc">Le poste de travail de semaine : silencieux, plat, reposant pour les poignets et pensé pour les longues journées de concentration.</p>
+        </div>
+
+        <div class="zen-grid-two">
+          <!-- MX Keys Mini -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8"/><line x1="10" y1="8" x2="10" y2="8"/><line x1="14" y1="8" x2="14" y2="8"/><line x1="18" y1="8" x2="18" y2="8"/><line x1="6" y1="12" x2="6" y2="12"/><line x1="10" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="14" y2="12"/><line x1="18" y1="12" x2="18" y2="12"/><line x1="8" y1="16" x2="16" y2="16"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">MÉCANISME CISEAUX &bull; FORMAT 75% &bull; 3 PROFILS</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Clavier Télétravail</span>
+                <span class="zen-hostname">Chiclet Plat</span>
+              </div>
+              <h3 class="zen-card-title">Logitech MX Keys Mini</h3>
+              <p class="zen-card-pitch">Touches concaves épousant la pulpe des doigts, course courte feutrée sans fatigue articulaire et format compact laissant tout l'espace nécessaire à la souris.</p>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">PCWorld</span>
+                  <span>« Tout simplement le meilleur clavier compact bureautique du marché. »</span>
+                  <a class="zen-review-link" href="https://www.pcworld.com/article/547221/logitech-mx-keys-mini-review-the-best-tiny-keyboard-you-can-buy.html" target="_blank" rel="noopener">Lire</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Souris Ergo -->
+          <article class="zen-card">
+            <div class="zen-card-media">
+              <div class="zen-blueprint">
+                <div class="blueprint-icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 1 5 5v10a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"/><line x1="12" y1="6" x2="12" y2="10"/></svg>
+                </div>
+                <span class="blueprint-badge-zen">ANGLE 57° &bull; DÉCHARGE CARPE &bull; MOLETTE SMARTWHEEL</span>
+              </div>
+            </div>
+            <div class="zen-card-body">
+              <div class="zen-card-meta">
+                <span class="zen-category">Souris Ergonomique</span>
+                <span class="zen-hostname">Posture Neutre</span>
+              </div>
+              <h3 class="zen-card-title">Souris Ergonomique Logitech</h3>
+              <p class="zen-card-pitch">Position en « poignée de main » relâchant la pression sur le canal carpien et prévenant les tensions de l'avant-bras lors des longues journées de rédaction.</p>
+
+              <div class="zen-reviews">
+                <div class="zen-review-line">
+                  <span class="zen-review-src">Santé &amp; Posture</span>
+                  <span>Alignement optimal avant-bras / poignet sans torsion.</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. BONS COUPS -->
+    <section class="zen-space" id="deals">
+      <div class="container">
+        <div class="space-heading-wrap">
+          <span class="space-kicker">Espace 07</span>
+          <h2 class="space-title">B O N S &nbsp; C O U P S</h2>
+          <p class="space-desc">Le classement assumé des achats au ratio prix/usage imbattable : ce qui a coûté le moins cher pour ce que ça rapporte au quotidien.</p>
+        </div>
+
+        <div class="zen-table-wrap">
+          <table class="zen-deals">
+            <thead>
+              <tr>
+                <th scope="col">Matériel</th>
+                <th scope="col">Coût Réel</th>
+                <th scope="col">Pourquoi c'est un coup magistral</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="deal-item-name">Disque 18 To démonté (Shucking)</td>
+                <td class="deal-item-cost">250 €</td>
+                <td class="deal-item-why"><strong>13,9 € / To</strong> pour un disque entreprise scellé à l'hélium, et le boîtier externe sert de mallette de transport.</td>
+              </tr>
+              <tr>
+                <td class="deal-item-name">NVIDIA Shield Android TV</td>
+                <td class="deal-item-cost">~199 €</td>
+                <td class="deal-item-why"><strong>11 ans de service ininterrompu</strong> (2015-2026). Lit tous les formats 4K et audio HD sans ralentissement ni obsolescence.</td>
+              </tr>
+              <tr>
+                <td class="deal-item-name">GameSir Nova 2 Lite</td>
+                <td class="deal-item-cost">~30 $</td>
+                <td class="deal-item-why">Capteurs magnétiques <strong>Effet Hall</strong> sur sticks et gâchettes pour le prix d'un jeu vidéo en solde. Zéro dérive.</td>
+              </tr>
+              <tr>
+                <td class="deal-item-name">Upgrade SSD 1 To Steam Deck</td>
+                <td class="deal-item-cost">~80 €</td>
+                <td class="deal-item-why">Achat du Deck 64 Go de base + swap du SSD NVMe 2230 soi-même. Économie de 150 € par rapport au modèle haut de gamme officiel.</td>
+              </tr>
+              <tr>
+                <td class="deal-item-name">Souris Zaopin Z1 Pro 4K</td>
+                <td class="deal-item-cost">60 - 75 €</td>
+                <td class="deal-item-why">Spécifications de souris esport d'élite (~50g, 4000 Hz sans fil, capteur PAW3395) vendue 2 à 3 fois moins cher que les ténors du marché.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PIED DE PAGE & CRÉDITS -->
+  <footer class="zen-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-credits">
+          <p><strong>Avis &amp; Critiques :</strong> Les citations de la presse spécialisée résument des bancs d'essai indépendants et renvoient vers leurs tests intégraux. Les textes descriptifs traduisent mon expérience directe d'utilisation.</p>
+          <p style="margin-top: 10px;"><strong>Crédits Photographiques :</strong> Les visuels d'illustration proviennent de <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (licences libres et domaine public) :
+          <a href="https://commons.wikimedia.org/wiki/File:AMD@5nmCCD(6nmIOD)@Zen4@Raphael@Ryzen_7_7800X3D@100-000000910_BS_2312PGY_9LW3390030138_DSCx01.jpg" target="_blank" rel="noopener">Ryzen 7800X3D</a> et <a href="https://commons.wikimedia.org/wiki/File:AMD@5nmCCD(6nmIOD)@Zen4@Raphael@Ryzen_7_7800X3D@100-000000910_BS_2312PGY_9LW3390030138_DSCx03.jpg" target="_blank" rel="noopener">die nu</a> (FritzchensFritz, CC0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Open_hard-drive.jpg" target="_blank" rel="noopener">Disque ouvert</a> (Zzubnik, DP) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Friction_stir_weld_on_helium-filled_hard_drive.jpg" target="_blank" rel="noopener">Soudure hélium</a> (Phiarc, CC BY-SA 4.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:3.5_inch_hard_disk_drive,_side_view.jpg" target="_blank" rel="noopener">Disque profil</a> (Gunnar Wolf, CC BY-SA 4.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Xbox_Series_S_with_controller.jpg" target="_blank" rel="noopener">Xbox blanche</a> (AsmodeanUnderscore, CC BY-SA 4.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Xbox_Wireless_Controller,_Model_1914_%27Shock_Blue%27.jpg" target="_blank" rel="noopener">Xbox bleue</a> (mliu92, CC BY-SA 3.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Xbox_Series_Controller_Carbon_Black.jpg" target="_blank" rel="noopener">Xbox noire</a> (uKER, CC BY-SA 4.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:NVidia_Shield_Android_TV.jpg" target="_blank" rel="noopener">Shield ouverte</a> (Oculus.Obscura, CC BY 2.0) &bull;
+          <a href="https://commons.wikimedia.org/wiki/File:Steam_Deck_(front).jpg" target="_blank" rel="noopener">Steam Deck</a> (Liam Dawe, CC BY-SA 4.0).</p>
+        </div>
+
+        <div class="footer-bottom-row">
+          <span>Le Parc de Tristan &bull; Second Cerveau Personnel</span>
+          <span>Esthétique Zen, Lin &amp; Sable naturel &bull; 2026</span>
+        </div>
       </div>
     </div>
-    <div class="info">
-      <span class="tag">Le shucking, ma méthode</span>
-      <h3>Des disques externes, déshabillés</h3>
-      <p>Un disque externe grand public coûte souvent moins cher que le même disque vendu nu. Alors j'achète l'externe, je l'ouvre et je mets le disque dans le NAS. Résultat : 18 To pour 250 €.</p>
-      <dl>
-        <dt>18 To</dt><dd>250 € en mars 2025, soit 13,9 €/To</dd>
-        <dt>12 To</dt><dd>environ 190 € estimés, soit 15,8 €/To</dd>
-        <dt>Boîtier</dt><dd>Conservé : il devient l'emballage de transport du disque</dd>
-      </dl>
-      <p class="note">Les modèles exacts cachés dans ces boîtiers varient selon les lots : <a href="https://slickdeals.net/f/18391738-seagate-expansion-desktop-hard-drive-18tb-206-99-ac">des acheteurs de 18 To Expansion y ont trouvé de l'Exos</a>, ce qui ne se garantit pas d'avance. <a href="https://www.petematheson.com/what-the-shuck-how-to-shuck-hard-drives/">Guide du shucking</a>.</p>
-      <ul class="press">
-        <li><span class="src">Android Central</span> place le DXP2800 parmi les meilleurs NAS 2 baies du moment. <a href="https://www.androidcentral.com/accessories/smart-home/ugreen-nasync-dxp2800-review">Lire</a></li>
-        <li><span class="src">The Gadgeteer</span> le trouve excellent et très bien construit. <a href="https://the-gadgeteer.com/2025/10/07/ugreen-nasync-dxp2800-review-another-great-nas/">Lire</a></li>
-        <li><span class="src">Neowin</span> y voit une vraie expérience NAS 2 baies à petit prix. <a href="https://www.neowin.net/reviews/ugreen-nasync-dxp2800--ups-review-a-full-two-bay-nas-experience-for-a-low-price/">Lire</a></li>
-      </ul>
-    </div>
-  </div>
+  </footer>
 
-  <ol class="steps">
-    <li><b>Acheter l'externe</b>Guetter une promo sur un gros disque de bureau.</li>
-    <li><b>Ouvrir le boîtier</b>Sortir le disque 3,5" de sa coque.</li>
-    <li><b>Monter en baie</b>Le disque rejoint le NAS, les NVMe gardent le quotidien.</li>
-    <li><b>Garder la coque</b>Elle sert d'emballage quand le disque voyage.</li>
-  </ol>
+  <script>
+    // Détection de la section active lors du défilement
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
 
-  <p class="note">Les médias du moment et les applis tournent sur les NVMe. Les deux disques peuvent donc dormir la plupart du temps, et la pièce reste silencieuse.</p>
-</div>
-</section>
-<section class="space" id="reseau">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Réseau &amp; maison</h2><p>Ce qui relie tout le reste, et ce qui fait tourner la maison.</p></header>
-<article class="unit">
-    <div class="visual">
-      <figure><div class="shot">
-        <svg class="plan" viewBox="0 0 480 360" role="img" aria-label="Schéma d'un réseau maillé à deux bornes reliant PC et NAS">
-          <rect class="s" x="60" y="84" width="96" height="150" rx="16"/><rect class="s" x="324" y="84" width="96" height="150" rx="16"/>
-          <circle class="o" cx="108" cy="110" r="6"/><circle class="o" cx="372" cy="110" r="6"/>
-          <path class="t" d="M156 130h168M156 150h168"/><text x="178" y="120">Wi-Fi 7 · 6 GHz</text>
-          <path class="l" d="M108 234v44M372 234v44"/><text x="62" y="300">PC · 2,5 GbE</text><text x="326" y="300">NAS · 2,5 GbE</text>
-        </svg></div><figcaption>Schéma du réseau</figcaption></figure>
-    </div>
-    <div class="info">
-      <span class="tag">Mesh Wi-Fi 7</span>
-      <h3>TP-Link Deco BE65</h3>
-      <p>Deux bornes BE9300 et huit ports 2,5 GbE au total : le NAS et le PC tournent à pleine vitesse, et le Wi-Fi 6 GHz fait le reste.</p>
-      <ul class="press"><li><span class="src">Blacktubi</span> y voit un mesh abouti et très rapide, avec une excellente appli. <a href="https://www.blacktubi.com/review/deco-be65/">Lire</a></li></ul>
-    </div>
-  </article>
-  <dl>
-    <dt>Domotique</dt><dd>Home Assistant, en machine virtuelle sur le NAS</dd>
-    <dt>Zigbee</dt><dd>Antenne SMLIGHT SLZB-06, déportée en PoE</dd>
-  </dl>
-</div>
-</section>
-<section class="space" id="mobile">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Mobile</h2><p>Tout ce qui quitte la maison, ou au moins le canapé.</p></header>
-<article class="unit">
-    <div class="visual">
-      <figure><div class="shot" style="aspect-ratio:16/7"><img src="photos/deck-face.jpg" alt="Steam Deck vu de face"></div><figcaption>Steam Deck LCD · photo du modèle</figcaption></figure>
-      <div class="duo">
-        <figure><div class="shot"><img src="photos/deck-detail.jpg" alt="Croix directionnelle et stick du Steam Deck en gros plan"></div><figcaption>Commandes en gros plan</figcaption></figure>
-        <figure><div class="shot"><img src="photos/nvme-2230.jpg" alt="SSD NVMe au format M.2 2230"></div><figcaption>Le format 2230 de l'upgrade. Illustration.</figcaption></figure>
-      </div>
-    </div>
-    <div class="info">
-      <span class="tag">Console portable</span>
-      <h3>Steam Deck LCD, passé à 1 To</h3>
-      <p>Le modèle de base plus un SSD 2230 d'environ 80 €, et le tour est joué. En streaming Moonlight depuis Big Daddy, il décode juste un flux vidéo : les gros jeux tournent sur la tour et le Deck reste froid et silencieux.</p>
-      <dl>
-        <dt>APU</dt><dd>AMD Zen 2 + RDNA 2, 16 Go LPDDR5</dd>
-        <dt>Stockage</dt><dd>NVMe M.2 2230, 1 To</dd>
-        <dt>Écran</dt><dd>7" IPS 1280 × 800</dd>
-      </dl>
-      <ul class="press">
-        <li><span class="src">TechRadar</span> le qualifie de portable redoutable. <a href="https://www.techradar.com/news/steam-deck">Lire</a></li>
-        <li><span class="src">Tom's Guide</span> y voit une Switch pour adultes. <a href="https://www.tomsguide.com/news/valve-steam-deck">Lire</a></li>
-      </ul>
-    </div>
-  </article>
-<article class="unit flip">
-    <div class="visual">
-      <figure><div class="shot">
-        <svg class="plan" viewBox="0 0 400 300" role="img" aria-label="Schéma d'un casque circum-aural">
-          <path class="l" style="stroke-width:6" d="M90 180C90 40 310 40 310 180"/>
-          <rect class="s" x="62" y="164" width="56" height="92" rx="26"/><rect class="s" x="282" y="164" width="56" height="92" rx="26"/>
-          <circle class="a" cx="90" cy="210" r="10"/><circle class="a" cx="310" cy="210" r="10"/><text x="146" y="214">ANC · 24 h</text>
-        </svg></div><figcaption>Schéma, pas de photo libre de ce casque</figcaption></figure>
-    </div>
-    <div class="info">
-      <span class="tag">Audio</span>
-      <h3>Bose QuietComfort SC</h3>
-      <p>La bulle de calme que Bose sait faire : réduction de bruit, 24 heures d'autonomie, multipoint entre deux appareils et environ 240 g sur la tête.</p>
-      <ul class="press">
-        <li><span class="src">RTINGS</span> a testé le QuietComfort et le trouve très efficace contre le bruit extérieur. <a href="https://rtings.com/headphones/reviews/bose/quietcomfort-headphones-wireless">Lire</a></li>
-        <li><span class="src">Which?</span> a sa fiche sur la version SC. <a href="https://www.which.co.uk/reviews/headphones/bose-quietcomfort-sc">Lire</a></li>
-      </ul>
-    </div>
-  </article>
-  <dl>
-    <dt>Tablette</dt><dd>Microsoft Surface Pro 7, surnommée Juanito</dd>
-    <dt>Téléphone</dt><dd>Google Pixel 9 Pro, 16 Go</dd>
-    <dt>Montre</dt><dd>OnePlus Watch sous Wear OS, 100 h d'autonomie</dd>
-  </dl>
-</div>
-</section>
-<section class="space" id="travail">
-<div class="inner">
-  <header class="space-head"><span class="kicker">Espace</span><h2>Travail</h2><p>Le poste de semaine : silencieux, plat et reposant pour les mains.</p></header>
-<div class="grid two">
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 300 300" role="img" aria-label="Schéma d'un clavier plat"><rect class="s" x="40" y="116" width="220" height="76" rx="6"/><path class="t" d="M40 138h220M40 160h220M84 116v76M128 116v76M172 116v76M216 116v76"/><rect class="a" x="52" y="98" width="30" height="8"/><rect class="a" x="90" y="98" width="30" height="8" opacity=".5"/><rect class="a" x="128" y="98" width="30" height="8" opacity=".25"/><text x="96" y="222">3 appareils</text></svg></div>
-      <span class="tag">Travail</span>
-      <h3>Logitech MX Keys Mini</h3>
-      <p>Frappe plate à ciseaux, silencieuse, et bascule entre trois appareils d'un appui.</p>
-      <ul class="press"><li><span class="src">PCWorld</span> en fait le meilleur petit clavier du marché. <a href="https://www.pcworld.com/article/547221/logitech-mx-keys-mini-review-the-best-tiny-keyboard-you-can-buy.html">Lire</a></li><li><span class="src">TechRadar</span> a son test complet. <a href="https://www.techradar.com/reviews/logitech-mx-keys-mini">Lire</a></li></ul>
-    </article>
-<article class="item">
-      <div class="shot">
-        <svg class="plan" viewBox="0 0 300 300" role="img" aria-label="Schéma d'une souris ergonomique"><path class="s" d="M104 244c-22-40-30-120 8-168 30-36 92-24 104 26 12 54-14 112-50 142z"/><path class="l" d="M132 92c10 12 12 34 6 56"/><text x="100" y="278">poignet relâché</text></svg></div>
-      <span class="tag">Travail</span>
-      <h3>Souris ergo Logitech</h3>
-      <p>Pour les longues journées, un angle de main qui épargne le poignet.</p>
-    </article>
-</div>
-</div>
-</section>
-<div class="inner">
-<section class="section" id="ratio">
-<div class="head">
-    <h2>Mes meilleurs coups</h2>
-    <p>Le classement que j'assume : ce qui a coûté le moins pour ce que ça rapporte. Les prix sont les miens ou des estimations.</p>
-  </div>
-  <div class="scroll">
-    <table class="deals">
-      <thead><tr><th scope="col">Matos</th><th scope="col">Coût</th><th scope="col">Pourquoi c'est un bon coup</th></tr></thead>
-      <tbody>
-        <tr><td>Disque 18 To démonté</td><td class="n">250 €</td><td>13,9 €/To, et le boîtier sert encore de valise.</td></tr>
-        <tr><td>NVIDIA Shield TV</td><td class="n">~199 €</td><td>Onze ans de service et toujours le client Plex de la maison.</td></tr>
-        <tr><td>GameSir Nova 2 Lite</td><td class="n">~30 $</td><td>Effet Hall sur sticks et gâchettes pour le prix d'un jeu en solde.</td></tr>
-        <tr><td>Upgrade SSD du Deck</td><td class="n">~80 €</td><td>1 To pour le prix de quelques jeux, sans changer de console.</td></tr>
-        <tr><td>Zaopin Z1 Pro 4K</td><td class="n">60-75 €</td><td>Des specs de souris premium au prix d'une souris de bureau.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-<footer class="credits">
-  <p><strong>Les avis</strong> sont des résumés de tests publiés, et chaque lien mène à l'original. Le reste du texte est de moi, donc pas très objectif.</p>
-  <p><strong>Les photos</strong> viennent de Wikimedia Commons et montrent le modèle ou une illustration, pas mes propres appareils. Les schémas sont dessinés pour ce site.
-  <a href="https://commons.wikimedia.org/wiki/File:AMD@5nmCCD(6nmIOD)@Zen4@Raphael@Ryzen_7_7800X3D@100-000000910_BS_2312PGY_9LW3390030138_DSCx01.jpg">Capot Ryzen</a> et <a href="https://commons.wikimedia.org/wiki/File:AMD@5nmCCD(6nmIOD)@Zen4@Raphael@Ryzen_7_7800X3D@100-000000910_BS_2312PGY_9LW3390030138_DSCx03.jpg">dessous Ryzen</a> : FritzchensFritz, CC0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:Open_hard-drive.jpg">Disque ouvert</a> : Zzubnik, domaine public ·
-  <a href="https://commons.wikimedia.org/wiki/File:Friction_stir_weld_on_helium-filled_hard_drive.jpg">Soudure hélium</a> : Phiarc, CC BY-SA 4.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:3.5_inch_hard_disk_drive,_side_view.jpg">Disque de profil</a> : Gunnar Wolf, CC BY-SA 4.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:Xbox_Series_S_with_controller.jpg">Xbox blanche</a> : AsmodeanUnderscore, CC BY-SA 4.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:Xbox_Wireless_Controller,_Model_1914_%27Shock_Blue%27.jpg">Xbox bleue</a> : mliu92, CC BY-SA 3.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:Xbox_Series_Controller_Carbon_Black.jpg">Xbox noire</a> : uKER, CC BY-SA 4.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:NVidia_Shield_Android_TV.jpg">Shield ouverte</a> : Oculus.Obscura, CC BY 2.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:Steam_Deck_(front).jpg">Steam Deck</a> et <a href="https://commons.wikimedia.org/wiki/File:Close_view_of_Steam_Deck_D-pad_and_analogue_stick.jpg">gros plan</a> : Liam Dawe / GamingOnLinux, CC BY-SA 4.0 ·
-  <a href="https://commons.wikimedia.org/wiki/File:A_2230_NVME_SSD.jpg">SSD 2230</a> : User5515, CC0.</p>
-</footer>
-</div>
-</main>
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const scrollY = window.pageYOffset;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
 </html>
